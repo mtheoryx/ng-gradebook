@@ -14,3 +14,33 @@
   width: 1px;
   height: 1px;
 }
+
+input {
+  border-radius:5px;
+  padding:5px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input.grade-input {
+  max-width:55px;
+}
+form.ng-pristine input {
+  border:1px solid #ccc;
+}
+
+input.ng-touched.ng-invalid {
+  border: 2px solid red;
+}
+input.ng-touched.ng-invalid:focus {
+  border: 2px solid yellow;
+}
+.row.list {
+  padding: 10px 5px;
+  border-bottom:1px dotted #ccc;
+}
+.row.add-student-form {
+  margin-top: 10px;
+}

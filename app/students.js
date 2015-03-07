@@ -13,15 +13,19 @@
             $scope.addStudent = addStudent;
 
             function addStudent() {
-                $scope.students.push({
-                    firstName:$scope.student.firstName,
-                    lastName:$scope.student.lastName,
-                    grade:$scope.student.grade
-                });
-                $scope.student = null;
-                $timeout(function () {
-                    $scope.$emit('save');
-                }, 0);
+                if ($scope.addStudentForm.$valid) {
+                    $scope.students.push({
+                        firstName:$scope.student.firstName,
+                        lastName:$scope.student.lastName,
+                        grade:$scope.student.grade
+                    });
+                    $scope.student = null;
+                    $timeout(function () {
+                        $scope.$emit('save');
+                        $scope.addStudentForm.$setPristine();
+              	        $scope.addStudentForm.$setUntouched();
+                    }, 0);
+                }
             }
 
         }]);

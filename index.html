@@ -33,26 +33,29 @@
             </div>
         </div>
         <div class="row add-student-form">
-            <form ng-submit="addStudent()">
+            <form ng-submit="addStudent()" novalidate name="addStudentForm">
                 <div class="col-sm-4">
                     <input type="text"
                            ng-model="student.firstName"
                            placeholder="First Name"
                            tabindex="1"
                            focus-on-save
-                           autofocus/>
+                           autofocus
+                           required/>
                 </div>
                 <div class="col-sm-4">
                     <input type="text"
                            ng-model="student.lastName"
                            placeholder="Last Name"
-                           tabindex="2"/>
+                           tabindex="2"
+                           required/>
                 </div>
                 <div class="col-sm-4">
                     <input type="number"
                            ng-model="student.grade"
                            placeholder="Grade"
-                           tabindex="3"/>
+                           tabindex="3"
+                           required/>
                 </div>
                 <input type="submit" class="hidden-submit"/>
             </form>
