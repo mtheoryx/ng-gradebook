@@ -1,0 +1,10 @@
+.headings {
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+.list {
+  border-bottom: 1px dotted #ccc;
+}
+.list:last-of-type {
+  border-bottom:2px solid black;
+}

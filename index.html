@@ -5,11 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title ng-bind="title"></title>
     <link rel="stylesheet" href="app/vendor/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app/style.css"/>
     <style>[ng-cloak] { display:none !important; }</style>
 </head>
 <body ng-controller="Students" ng-cloak>
-    <h1>Hello World!</h1>
+    <div class="container">
+        <h1>Grade Book</h1>
+        <p>Super simple test score calculation</p>
+        <div class="row">
+            <h2>Test Scores</h2>
+        </div>
+        <div class="row headings">
+            <div class="col-sm-4"><span>First</span></div>
+            <div class="col-sm-4"><span>Last</span></div>
+            <div class="col-sm-4"><span>Grade</span></div>
+        </div>
+        <div class="row list"
+             ng-repeat="student in students track by $index">
+            <div class="col-sm-4">
+                <span ng-bind="student.firstName"></span>
+            </div>
+            <div class="col-sm-4">
+                <span ng-bind="student.lastName"></span>
+            </div>
+            <div class="col-sm-4">
+                <span ng-bind="student.grade"></span>
+            </div>
 
+        </div>
+
+
+    </div>
     <script src="app/vendor/lodash.min.js"></script>
     <script src="app/vendor/angular.min.js"></script>
     <script src="app/app.js"></script>
