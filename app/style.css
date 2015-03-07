@@ -44,3 +44,6 @@ input.ng-touched.ng-invalid:focus {
 .row.add-student-form {
   margin-top: 10px;
 }
+.row.list.failing {
+  background-color: #FFDBDA;
+}
