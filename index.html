@@ -57,7 +57,10 @@
                             ng-show="isEditing && isEditingItem($index)"
                             ng-click="cancelEdit($index)">Cancel</button>
                     <button class="btn btn-danger btn-sm"
+                            ng-hide="isEditing && isEditingItem($index)"
                             ng-click="clearAddFormValidation();deleteStudent($index)">Delete</button>
+                    <button class="btn btn-success btn-sm"
+                            ng-show="isEditing && isEditingItem($index)">Save</button>
                 </div>
             </div>
         </form>
