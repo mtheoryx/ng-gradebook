@@ -5,4 +5,7 @@
     ngGradebookApp.run(['$rootScope', function ($rootScope) {
         $rootScope._ = window._;
     }]);
+    ngGradebookApp.controller('StudentController', ['$scope', '_', function ($scope, _) {
+        
+    }]);
 })();
