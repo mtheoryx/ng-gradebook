@@ -38,19 +38,21 @@
                     <input type="text"
                            ng-model="student.firstName"
                            placeholder="First Name"
-                           tabindex="1"/>
+                           tabindex="1"
+                           focus-on-save
+                           autofocus/>
                 </div>
                 <div class="col-sm-4">
                     <input type="text"
                            ng-model="student.lastName"
-                            placeholder="Last Name"
-                            tabindex="2"/>
+                           placeholder="Last Name"
+                           tabindex="2"/>
                 </div>
                 <div class="col-sm-4">
                     <input type="number"
-                            ng-model="student.grade"
-                            placeholder="Grade"
-                            tabindex="3"/>
+                           ng-model="student.grade"
+                           placeholder="Grade"
+                           tabindex="3"/>
                 </div>
                 <input type="submit" class="hidden-submit"/>
             </form>
@@ -64,5 +66,6 @@
     <script src="app/app_constant.js"></script>
     <script src="app/app_run.js"></script>
     <script src="app/students.js"></script>
+    <script src="app/focus-on-save.js"></script>
 </body>
 </html>

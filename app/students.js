@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('ngGradebookApp')
-        .controller('Students', ['$scope', function ($scope) {
+        .controller('Students', ['$scope', '$timeout', function ($scope, $timeout) {
             $scope.students = [
               {firstName: 'Joe', lastName: 'Schmoe', grade: 50},
               {firstName: 'Michael ', lastName: 'Lieberman', grade: 97},
@@ -19,9 +19,10 @@
                     grade:$scope.student.grade
                 });
                 $scope.student = null;
+                $timeout(function () {
+                    $scope.$emit('save');
+                }, 0);
             }
-
-
 
         }]);
 })();
