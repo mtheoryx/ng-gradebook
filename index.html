@@ -31,7 +31,29 @@
             <div class="col-sm-4">
                 <span ng-bind="student.grade"></span>
             </div>
-
+        </div>
+        <div class="row add-student-form">
+            <form ng-submit="addStudent()">
+                <div class="col-sm-4">
+                    <input type="text"
+                           ng-model="student.firstName"
+                           placeholder="First Name"
+                           tabindex="1"/>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text"
+                           ng-model="student.lastName"
+                            placeholder="Last Name"
+                            tabindex="2"/>
+                </div>
+                <div class="col-sm-4">
+                    <input type="number"
+                            ng-model="student.grade"
+                            placeholder="Grade"
+                            tabindex="3"/>
+                </div>
+                <input type="submit" class="hidden-submit"/>
+            </form>
         </div>
 
 

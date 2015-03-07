@@ -8,3 +8,9 @@
 .list:last-of-type {
   border-bottom:2px solid black;
 }
+.hidden-submit {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}

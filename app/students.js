@@ -10,5 +10,18 @@
               {firstName: 'Olive ', lastName: 'Castleman', grade: 100}
             ];
 
+            $scope.addStudent = addStudent;
+
+            function addStudent() {
+                $scope.students.push({
+                    firstName:$scope.student.firstName,
+                    lastName:$scope.student.lastName,
+                    grade:$scope.student.grade
+                });
+                $scope.student = null;
+            }
+
+
+
         }]);
 })();
