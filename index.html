@@ -55,7 +55,8 @@
                            ng-model="student.grade"
                            placeholder="Grade"
                            tabindex="3"
-                           required/>
+                           required
+                           ng-blur="addStudent()"/>
                 </div>
                 <input type="submit" class="hidden-submit"/>
             </form>
