@@ -9,9 +9,17 @@
               {firstName: 'Patricia ', lastName: 'Rundell', grade: 95},
               {firstName: 'Olive ', lastName: 'Castleman', grade: 100}
             ];
+            $scope.isEditing = false;
+            $scope.itemEdited = false;
+            $scope.newField = {};
 
             $scope.addStudent = addStudent;
             $scope.deleteStudent = deleteStudent;
+            $scope.clearAddFormValidation = clearAddFormValidation;
+            $scope.editStudent = editStudent;
+            $scope.cancelEdit = cancelEdit;
+            $scope.clearStudentListFormValidation = clearStudentListFormValidation;
+            $scope.isEditingItem = isEditingItem;
 
             function addStudent() {
                 if ($scope.addStudentForm.$valid) {
@@ -23,14 +31,42 @@
                     $scope.student = null;
                     $timeout(function () {
                         $scope.$emit('save');
-                        $scope.addStudentForm.$setPristine();
-              	        $scope.addStudentForm.$setUntouched();
+                        $scope.clearAddFormValidation();
                     }, 0);
                 }
             }
 
             function deleteStudent($index) {
                 $scope.students.splice($index, 1);
+            }
+
+            function clearAddFormValidation() {
+                $scope.addStudentForm.$setPristine();
+                $scope.addStudentForm.$setUntouched();
+            }
+
+            function editStudent(student, $index) {
+                $scope.newField = angular.copy(student);
+                $scope.$emit('editing');
+                $scope.isEditing = true;
+                $scope.itemEdited = $index;
+            }
+
+            function cancelEdit($index) {
+                $scope.students[$index] = $scope.newField;
+                $scope.newField = {};
+                $scope.isEditing = false;
+                $scope.itemEdited = false;
+                $scope.clearStudentListFormValidation();
+            }
+
+            function clearStudentListFormValidation() {
+                $scope.updateStudentsForm.$setPristine();
+                $scope.updateStudentsForm.$setUntouched();
+            }
+
+            function isEditingItem($index) {
+                return $index === $scope.itemEdited;
             }
 
         }]);

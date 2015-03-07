@@ -21,23 +21,31 @@
             <div class="col-sm-3"><span>Grade</span></div>
             <div class="col-sm-3"><span>Actions</span></div>
         </div>
-        <div class="row list"
-             ng-repeat="student in students track by $index"
-             ng-class="{'failing' : student.grade < 65, 'passing' : student.grade >= 65, 'excelling' : student.grade > 90}">
-            <div class="col-sm-3">
-                <span ng-bind="student.firstName"></span>
+        <form name="updateStudentsForm">
+            <div class="row list"
+                 ng-repeat="student in students track by $index"
+                 ng-class="{'failing' : student.grade < 65, 'passing' : student.grade >= 65, 'excelling' : student.grade > 90}">
+                <div class="col-sm-3">
+                    <span ng-bind="student.firstName"></span>
+                </div>
+                <div class="col-sm-3">
+                    <span ng-bind="student.lastName"></span>
+                </div>
+                <div class="col-sm-3">
+                    <span ng-bind="student.grade"></span>
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-default btn-sm"
+                            ng-hide="isEditing && isEditingItem($index)"
+                            ng-click="clearAddFormValidation();editStudent(student, $index)">Edit</button>
+                    <button class="btn btn-default btn-sm"
+                            ng-show="isEditing && isEditingItem($index)"
+                            ng-click="cancelEdit($index)">Cancel</button>
+                    <button class="btn btn-danger btn-sm"
+                            ng-click="clearAddFormValidation();deleteStudent($index)">Delete</button>
+                </div>
             </div>
-            <div class="col-sm-3">
-                <span ng-bind="student.lastName"></span>
-            </div>
-            <div class="col-sm-3">
-                <span ng-bind="student.grade"></span>
-            </div>
-            <div class="col-sm-3">
-                <button class="btn btn-danger btn-sm"
-                        ng-click="deleteStudent($index)">Delete</button>
-            </div>
-        </div>
+        </form>
         <div class="row add-student-form">
             <form ng-submit="addStudent()" novalidate name="addStudentForm">
                 <div class="col-sm-3">
