@@ -21,7 +21,7 @@
             <div class="col-sm-3"><span>Grade</span></div>
             <div class="col-sm-3"><span>Actions</span></div>
         </div>
-        <form name="updateStudentsForm">
+        <form name="updateStudentsForm" novalidate ng-submit="updateStudent()">
             <div class="row list"
                  ng-repeat="student in students track by $index"
                  ng-class="{'failing' : student.grade < 65, 'passing' : student.grade >= 65, 'excelling' : student.grade > 90}">
@@ -60,7 +60,9 @@
                             ng-hide="isEditing && isEditingItem($index)"
                             ng-click="clearAddFormValidation();deleteStudent($index)">Delete</button>
                     <button class="btn btn-success btn-sm"
-                            ng-show="isEditing && isEditingItem($index)">Save</button>
+                            type="submit"
+                            ng-show="isEditing && isEditingItem($index)"
+                            ng-click="updateStudent(student, $index)">Save</button>
                 </div>
             </div>
         </form>

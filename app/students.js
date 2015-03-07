@@ -18,6 +18,7 @@
             $scope.clearAddFormValidation = clearAddFormValidation;
             $scope.editStudent = editStudent;
             $scope.cancelEdit = cancelEdit;
+            $scope.updateStudent = updateStudent;
             $scope.clearStudentListFormValidation = clearStudentListFormValidation;
             $scope.isEditingItem = isEditingItem;
 
@@ -58,6 +59,15 @@
                 $scope.isEditing = false;
                 $scope.itemEdited = false;
                 $scope.clearStudentListFormValidation();
+            }
+
+            function updateStudent(student, $index) {
+                if ($scope.updateStudentsForm.$valid && $scope.updateStudentsForm.$dirty) {
+                  $scope.students[$index] = student;
+                  $scope.clearStudentListFormValidation();
+                  $scope.isEditing = false;
+                  $scope.itemEdited = false;
+                }
             }
 
             function clearStudentListFormValidation() {
