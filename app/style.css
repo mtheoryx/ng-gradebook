@@ -47,3 +47,9 @@ input.ng-touched.ng-invalid:focus {
 .row.list.failing {
   background-color: #FFDBDA;
 }
+.row.list.passing {
+  background-color: #fafae7;
+}
+.row.list.excelling {
+  background-color: #e4f6e3 ;
+}
