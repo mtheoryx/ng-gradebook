@@ -16,25 +16,30 @@
             <h2>Test Scores</h2>
         </div>
         <div class="row headings">
-            <div class="col-sm-4"><span>First</span></div>
-            <div class="col-sm-4"><span>Last</span></div>
-            <div class="col-sm-4"><span>Grade</span></div>
+            <div class="col-sm-3"><span>First</span></div>
+            <div class="col-sm-3"><span>Last</span></div>
+            <div class="col-sm-3"><span>Grade</span></div>
+            <div class="col-sm-3"><span>Actions</span></div>
         </div>
         <div class="row list"
              ng-repeat="student in students track by $index">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <span ng-bind="student.firstName"></span>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <span ng-bind="student.lastName"></span>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <span ng-bind="student.grade"></span>
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-danger btn-sm"
+                        ng-click="deleteStudent($index)">Delete</button>
             </div>
         </div>
         <div class="row add-student-form">
             <form ng-submit="addStudent()" novalidate name="addStudentForm">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <input type="text"
                            ng-model="student.firstName"
                            placeholder="First Name"
@@ -43,14 +48,14 @@
                            autofocus
                            required/>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <input type="text"
                            ng-model="student.lastName"
                            placeholder="Last Name"
                            tabindex="2"
                            required/>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <input type="number"
                            ng-model="student.grade"
                            placeholder="Grade"
@@ -58,6 +63,7 @@
                            required
                            ng-blur="addStudent()"/>
                 </div>
+                <div class="col-sm-3"></div>
                 <input type="submit" class="hidden-submit"/>
             </form>
         </div>

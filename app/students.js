@@ -11,6 +11,7 @@
             ];
 
             $scope.addStudent = addStudent;
+            $scope.deleteStudent = deleteStudent;
 
             function addStudent() {
                 if ($scope.addStudentForm.$valid) {
@@ -26,6 +27,10 @@
               	        $scope.addStudentForm.$setUntouched();
                     }, 0);
                 }
+            }
+
+            function deleteStudent($index) {
+                $scope.students.splice($index, 1);
             }
 
         }]);
