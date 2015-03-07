@@ -64,3 +64,15 @@ input.ng-touched.ng-invalid:focus {
 .btn {
   min-width:60px;
 }
+
+.test-data {
+
+  padding-top:8px;
+}
+.test-data-label {
+  font-size: .8em;
+}
+.test-data-number {
+  font-size: 1em;
+  font-weight: bold;
+}

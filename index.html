@@ -95,12 +95,17 @@
                            required
                            ng-blur="addStudent()"/>
                 </div>
-                <div class="col-sm-3"></div>
                 <input type="submit" class="hidden-submit"/>
             </form>
+            <div class="col-sm-3 test-data">
+                <span class="test-data-label">Min: </span>
+                    <span class="test-data-number" ng-bind="grades.min"></span>
+                <span class="test-data-label">Max: </span>
+                    <span class="test-data-number" ng-bind="grades.max"></span>
+                <span class="test-data-label">Avg: </span>
+                    <span class="test-data-number" ng-bind="grades.avg"></span>
+            </div>
         </div>
-
-
     </div>
     <script src="app/vendor/lodash.min.js"></script>
     <script src="app/vendor/angular.min.js"></script>

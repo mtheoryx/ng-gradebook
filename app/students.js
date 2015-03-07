@@ -2,6 +2,8 @@
     'use strict';
     angular.module('ngGradebookApp')
         .controller('Students', ['$scope', '$timeout', function ($scope, $timeout) {
+
+            //Variables
             $scope.students = [
               {firstName: 'Joe', lastName: 'Schmoe', grade: 50},
               {firstName: 'Michael ', lastName: 'Lieberman', grade: 97},
@@ -13,6 +15,7 @@
             $scope.itemEdited = false;
             $scope.newField = {};
 
+            //Methods
             $scope.addStudent = addStudent;
             $scope.deleteStudent = deleteStudent;
             $scope.clearAddFormValidation = clearAddFormValidation;
@@ -21,6 +24,18 @@
             $scope.updateStudent = updateStudent;
             $scope.clearStudentListFormValidation = clearStudentListFormValidation;
             $scope.isEditingItem = isEditingItem;
+            $scope.calculateGrades = calculateGrades;
+
+            //Initialization
+            $scope.calculateGrades();
+
+            //Events
+            $scope.$on('updated', function() {
+              $scope.calculateGrades();
+            });
+            $scope.$on('save', function () {
+                $scope.calculateGrades();
+            });
 
             function addStudent() {
                 if ($scope.addStudentForm.$valid) {
@@ -63,10 +78,16 @@
 
             function updateStudent(student, $index) {
                 if ($scope.updateStudentsForm.$valid && $scope.updateStudentsForm.$dirty) {
-                  $scope.students[$index] = student;
-                  $scope.clearStudentListFormValidation();
-                  $scope.isEditing = false;
-                  $scope.itemEdited = false;
+
+                    $scope.students[$index] = student;
+                    $scope.clearStudentListFormValidation();
+                    $scope.isEditing = false;
+                    $scope.itemEdited = false;
+
+                    $timeout(function() {
+                      $scope.$emit('updated');
+                    }, 500);
+
                 }
             }
 
@@ -79,5 +100,16 @@
                 return $index === $scope.itemEdited;
             }
 
+            function calculateGrades() {
+                $scope.grades = [];
+
+                angular.forEach($scope.students, function(value, key){
+                  $scope.grades.push(value.grade);
+                });
+
+                $scope.grades.min = _.min($scope.grades);
+                $scope.grades.max = _.max($scope.grades);
+                $scope.grades.avg = _.sum($scope.grades)/$scope.grades.length;
+            }
         }]);
 })();
