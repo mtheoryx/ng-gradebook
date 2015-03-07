@@ -6,7 +6,7 @@
   border-bottom: 1px dotted #ccc;
 }
 .list:last-of-type {
-  border-bottom:2px solid black;
+  /*border-bottom:2px solid black;*/
 }
 .hidden-submit {
   position: absolute;
@@ -37,19 +37,30 @@ input.ng-touched.ng-invalid {
 input.ng-touched.ng-invalid:focus {
   border: 2px solid yellow;
 }
-.row.list {
+.row {
   padding: 10px 5px;
   border-bottom:1px dotted #ccc;
 }
-.row.add-student-form {
-  margin-top: 10px;
+.list:last-of-type {
+  border:none;
 }
-.row.list.failing {
+.add-student-form {
+  /*margin-top: 10px;*/
+}
+.list.failing {
   background-color: #FFDBDA;
 }
-.row.list.passing {
+.list.passing {
   background-color: #fafae7;
 }
-.row.list.excelling {
+.list.excelling {
   background-color: #e4f6e3 ;
+}
+.add-student-form {
+  background-color: #F2F2F2;
+  border: 1px solid #CACACA;
+}
+
+.btn {
+  min-width:60px;
 }
