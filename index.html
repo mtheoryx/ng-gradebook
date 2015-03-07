@@ -99,11 +99,11 @@
             </form>
             <div class="col-sm-3 test-data">
                 <span class="test-data-label">Min: </span>
-                    <span class="test-data-number" ng-bind="grades.min"></span>
-                <span class="test-data-label">Max: </span>
-                    <span class="test-data-number" ng-bind="grades.max"></span>
+                    <span class="test-data-number min" ng-bind="grades.min | percentage:0"></span>
                 <span class="test-data-label">Avg: </span>
-                    <span class="test-data-number" ng-bind="grades.avg"></span>
+                    <span class="test-data-number avg" ng-bind="grades.avg | percentage:0"></span>
+                <span class="test-data-label">Max: </span>
+                    <span class="test-data-number max" ng-bind="grades.max | percentage:0"></span>
             </div>
         </div>
     </div>
@@ -114,5 +114,6 @@
     <script src="app/app_run.js"></script>
     <script src="app/students.js"></script>
     <script src="app/focus-on-save.js"></script>
+    <script src="app/percentage-filter.js"></script>
 </body>
 </html>

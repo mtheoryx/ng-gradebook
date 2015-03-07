@@ -66,13 +66,12 @@ input.ng-touched.ng-invalid:focus {
 }
 
 .test-data {
-
-  padding-top:8px;
+  padding-top:5px;
 }
 .test-data-label {
-  font-size: .8em;
+  font-size: .6em;
 }
 .test-data-number {
-  font-size: 1em;
+  font-size: .9em;
   font-weight: bold;
 }
