@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('ngGradebookApp')
-        .controller('Students', ['$scope', '$timeout', function ($scope, $timeout) {
+        .controller('Students', ['$scope', '$timeout', '$q', 'GradesSvc', function ($scope, $timeout, $q, GradesSvc) {
 
             //Variables
             $scope.students = [
@@ -14,6 +14,7 @@
             $scope.isEditing = false;
             $scope.itemEdited = false;
             $scope.newField = {};
+            $scope.grades = {};
 
             //Methods
             $scope.addStudent = addStudent;
@@ -30,11 +31,8 @@
             $scope.calculateGrades();
 
             //Events
-            $scope.$on('updated', function() {
+            $scope.$on('update', function() {
               $scope.calculateGrades();
-            });
-            $scope.$on('save', function () {
-                $scope.calculateGrades();
             });
 
             function addStudent() {
@@ -46,7 +44,7 @@
                     });
                     $scope.student = null;
                     $timeout(function () {
-                        $scope.$emit('save');
+                        $scope.$emit('update');
                         $scope.clearAddFormValidation();
                     }, 0);
                 }
@@ -63,7 +61,6 @@
 
             function editStudent(student, $index) {
                 $scope.newField = angular.copy(student);
-                $scope.$emit('editing');
                 $scope.isEditing = true;
                 $scope.itemEdited = $index;
             }
@@ -85,8 +82,8 @@
                     $scope.itemEdited = false;
 
                     $timeout(function() {
-                      $scope.$emit('updated');
-                    }, 500);
+                      $scope.$emit('update');
+                    }, 0);
 
                 }
             }
@@ -101,15 +98,12 @@
             }
 
             function calculateGrades() {
-                $scope.grades = [];
-
-                angular.forEach($scope.students, function(value, key){
-                  $scope.grades.push(value.grade);
+                var getAllGradeStats = GradesSvc.getAllGradeStats($scope.students);
+                getAllGradeStats.then(function (data) {
+                    $scope.grades.avg = data[0];
+                    $scope.grades.min = data[1];
+                    $scope.grades.max = data[2];
                 });
-
-                $scope.grades.min = _.min($scope.grades);
-                $scope.grades.max = _.max($scope.grades);
-                $scope.grades.avg = _.sum($scope.grades)/$scope.grades.length;
             }
         }]);
 })();
