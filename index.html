@@ -29,7 +29,10 @@
                     <span ng-bind="student.firstName"
                           ng-hide="isEditing && isEditingItem($index)"
                           ng-click="clearAddFormValidation();editStudent(student, $index)"></span>
+                    <label class="visually-hidden" for="{{$index}}.{{student.firstName}}">First Name</label>
                     <input type="text"
+                           name="{{$index}}.{{student.firstName}}"
+                           id="{{$index}}.{{student.firstName}}"
                            required
                            ng-model="student.firstName"
                            ng-show="isEditing  && isEditingItem($index)"/>
@@ -38,7 +41,10 @@
                     <span ng-bind="student.lastName"
                           ng-hide="isEditing && isEditingItem($index)"
                           ng-click="clearAddFormValidation();editStudent(student, $index)"></span>
+                    <label class="visually-hidden" for="{{$index}}.{{student.lastName}}">Last Name</label>
                     <input type="text"
+                           name="{{$index}}.{{student.lastName}}"
+                           id="{{$index}}.{{student.lastName}}"
                            required
                            ng-model="student.lastName"
                            ng-show="isEditing  && isEditingItem($index)" />
@@ -47,7 +53,10 @@
                     <span ng-bind="student.grade"
                           ng-hide="isEditing && isEditingItem($index)"
                           ng-click="clearAddFormValidation();editStudent(student, $index)"></span>
+                    <label class="visually-hidden" for="{{$index}}.{{student.grade}}"></label>
                     <input type="number"
+                           name="{{$index}}.{{student.grade}}"
+                           id="{{$index}}.{{student.grade}}"
                            required
                            ng-model="student.grade"
                            ng-show="isEditing  && isEditingItem($index)" />
@@ -72,7 +81,10 @@
         <div class="row add-student-form">
             <form ng-submit="addStudent()" novalidate name="addStudentForm">
                 <div class="col-sm-3">
+                    <label class="visually-hidden" for="newStudentFirstName">New First Name</label>
                     <input type="text"
+                           name="newStudentFirstName"
+                           id="newStudentFirstName"
                            ng-model="student.firstName"
                            placeholder="First Name"
                            tabindex="1"
@@ -81,14 +93,20 @@
                            required/>
                 </div>
                 <div class="col-sm-3">
+                    <label class="visually-hidden" for="newStudentLastName">New Last Name</label>
                     <input type="text"
+                           name="newStudentLastName"
+                           id="newStudentLastName"
                            ng-model="student.lastName"
                            placeholder="Last Name"
                            tabindex="2"
                            required/>
                 </div>
                 <div class="col-sm-3">
+                    <label class="visually-hidden" for="newStudentGrade">Grade</label>
                     <input type="number"
+                           name="newStudentGrade"
+                           id="newStudentGrade"
                            ng-model="student.grade"
                            placeholder="Grade"
                            tabindex="3"
