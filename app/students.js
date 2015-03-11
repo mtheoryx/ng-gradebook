@@ -1,22 +1,16 @@
 (function () {
     'use strict';
     angular.module('ngGradebookApp')
-        .controller('Students', ['$scope', '$timeout', '$q', 'GradesSvc', function ($scope, $timeout, $q, GradesSvc) {
+        .controller('Students', ['$scope', '$timeout', '$q', 'StudentsSvc', 'GradesSvc', function ($scope, $timeout, $q, StudentsSvc, GradesSvc) {
 
             //Variables
-            $scope.students = [
-              {firstName: 'Joe', lastName: 'Schmoe', grade: 50},
-              {firstName: 'Michael ', lastName: 'Lieberman', grade: 97},
-              {firstName: 'Steven ', lastName: 'Romano', grade: 80},
-              {firstName: 'Patricia ', lastName: 'Rundell', grade: 95},
-              {firstName: 'Olive ', lastName: 'Castleman', grade: 100}
-            ];
             $scope.isEditing = false;
             $scope.itemEdited = false;
             $scope.newField = {};
             $scope.grades = {};
 
             //Methods
+            $scope.getStudents = getStudents;
             $scope.addStudent = addStudent;
             $scope.deleteStudent = deleteStudent;
             $scope.clearAddFormValidation = clearAddFormValidation;
@@ -28,30 +22,26 @@
             $scope.calculateGrades = calculateGrades;
 
             //Initialization
-            $scope.calculateGrades();
-
-            //Events
-            $scope.$on('update', function() {
-              $scope.calculateGrades();
-            });
+            $scope.getStudents();
 
             function addStudent() {
                 if ($scope.addStudentForm.$valid) {
-                    $scope.students.push({
-                        firstName:$scope.student.firstName,
-                        lastName:$scope.student.lastName,
-                        grade:$scope.student.grade
-                    });
-                    $scope.student = null;
-                    $timeout(function () {
-                        $scope.$emit('update');
+                    var addStudentPromise = StudentsSvc.addStudent($scope.student);
+                    addStudentPromise.then(function (data) {
+                        $scope.students = data;
+                        $scope.student = null;
                         $scope.clearAddFormValidation();
-                    }, 0);
+                        $scope.calculateGrades();
+                    });
                 }
             }
 
             function deleteStudent($index) {
-                $scope.students.splice($index, 1);
+                var deleteStudentPromise = StudentsSvc.deleteStudent($index);
+                deleteStudentPromise.then(function (data) {
+                    $scope.students = data;
+                    $scope.calculateGrades();
+                });
             }
 
             function clearAddFormValidation() {
@@ -75,16 +65,14 @@
 
             function updateStudent(student, $index) {
                 if ($scope.updateStudentsForm.$valid && $scope.updateStudentsForm.$dirty) {
-
-                    $scope.students[$index] = student;
-                    $scope.clearStudentListFormValidation();
-                    $scope.isEditing = false;
-                    $scope.itemEdited = false;
-
-                    $timeout(function() {
-                      $scope.$emit('update');
-                    }, 0);
-
+                    var updateStudentPromise = StudentsSvc.updateStudent(student, $index);
+                    updateStudentPromise.then(function (data) {
+                        $scope.students = data;
+                        $scope.clearStudentListFormValidation();
+                        $scope.isEditing = false;
+                        $scope.itemEdited = false;
+                        $scope.calculateGrades();
+                    });
                 }
             }
 
@@ -95,6 +83,14 @@
 
             function isEditingItem($index) {
                 return $index === $scope.itemEdited;
+            }
+
+            function getStudents() {
+                var studentsSvcPromise = StudentsSvc.getStudents();
+                studentsSvcPromise.then(function (data) {
+                    $scope.students = data;
+                    $scope.calculateGrades();
+                });
             }
 
             function calculateGrades() {
